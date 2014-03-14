@@ -21,8 +21,6 @@
 		</p>
 	</div>
 
-	<div id="list-region" class="container"></div>
-
 	<div id="contact-region" class="container"></div>
 
 	<script type="text/template" id="static-template">
@@ -31,7 +29,7 @@
 
 
 	<script type="text/template" id="different-static-template">
-		<p>Text from a different template</p>
+		<p>Text from a static template</p>
 	</script>
 
 
@@ -52,99 +50,61 @@
 	<script src="./assets/js/vendor/backbone.marionette.js"></script>
 
 	<!-- Custom JS -->
+	<script src="./assets/js/app.js"></script>
+	<script src="./assets/js/entities/contact.js"></script>
+
 	<script type="text/javascript">
-		var ContactManager = new Marionette.Application();
 
-		// Models
-		ContactManager.Contact = Backbone.Model.extend({
-			defaults: {
-				firstName: "Jane",
-				lastName: "Doe",
-				phoneNumber: "No phone number!"
-			}
-		});
-
-		// Regions and Templates
-		ContactManager.addRegions({
-			mainRegion: "#main-region",
-			contactRegion: "#contact-region"
-		});
-
-		// VIEWS
-		//
-		// *Item Views
+		// // VIEWS
+		// //
+		// // *Item Views
 		ContactManager.StaticView = Marionette.ItemView.extend({
 			id: "static-view",
 			tagName: "span",
 			className: "instruction",
 			template: "#static-template"
 		});
-		ContactManager.ContactView = Marionette.ItemView.extend({
-			template: "#contact-template",
+		// ContactManager.ContactView = Marionette.ItemView.extend({
+		// 	template: "#contact-template",
 
-			events: {
-				"click p": "alertPhoneNumber"
-			},
+		// 	events: {
+		// 		"click p": "alertPhoneNumber"
+		// 	},
 
-			alertPhoneNumber: function (event) {
-				console.log(this.model.escape("phoneNumber"));
-			}
-		});
+		// 	alertPhoneNumber: function (event) {
+		// 		console.log(this.model.escape("phoneNumber"));
+		// 	}
+		// });
+
 		ContactManager.ContactItemView = Marionette.ItemView.extend({
 			tagName: "li",
 			template: "#contact-list-item"
 		});
 
-		// *CollectionViews
+		// // *CollectionViews
 		ContactManager.ContactsView = Marionette.CollectionView.extend({
 			tagName: "ul",
 			itemView: ContactManager.ContactItemView
 		});
 
-
-		// Collections
-		ContactManager.ContactCollection = Backbone.Collection.extend({
-			model: ContactManager.Contact,
-			comparator: "lastName"
-		});
-
-		// EventHandlers
-		ContactManager.on('initialize:after', function () {
-			console.log("ContactManger has started!");
-
-			// Collection
-			var contacts = new ContactManager.ContactCollection([
-				{
-					firstName: "Bob",
-					lastName: "Thornton"
-				},
-				{
-					firstName: "John",
-					lastName: "Johnson",
-					phoneNumber: "000-0001"
-				},
-				{
-					firstName: "Sally",
-					lastName: "Sallerson"
-				}
-			]);
+		ContactManager.on("initialize:after", function () {
+			var contacts = ContactManager.request('contact:entities');
 
 			var contactsListView = new ContactManager.ContactsView({
 				collection: contacts
-			})
+			});
 
-			ContactManager.contactRegion.show(contactsListView);
-
-			// Inline Static View
 			var staticView = new ContactManager.StaticView({
 				template: "#different-static-template"
 			});
+
 			ContactManager.mainRegion.show(staticView);
 
+			ContactManager.contactRegion.show(contactsListView);
 
 		});
-
 		ContactManager.start();
+
 	</script>
 </body>
 </html>
