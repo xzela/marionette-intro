@@ -36,7 +36,7 @@
 
 
 	<script type="text/template" id="contact-list-item">
-		<li><%= lastName %>, <%= firstName %> - <%= phoneNumber %> </li>
+		<%= lastName %>, <%= firstName %> - <%= phoneNumber %>
 	</script>
 
 
@@ -91,6 +91,7 @@
 			}
 		});
 		ContactManager.ContactItemView = Marionette.ItemView.extend({
+			tagName: "li",
 			template: "#contact-list-item"
 		});
 
@@ -103,7 +104,8 @@
 
 		// Collections
 		ContactManager.ContactCollection = Backbone.Collection.extend({
-			model: ContactManager.Contact
+			model: ContactManager.Contact,
+			comparator: "lastName"
 		});
 
 		// EventHandlers
