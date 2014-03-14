@@ -21,6 +21,10 @@
 		</p>
 	</div>
 
+	<div id="list-region" class="container">
+
+	</div>
+
 	<script type="text/template" id="static-template">
 		<p>This is text that was rendered by our Marionette app. </p>
 	</script>
@@ -28,6 +32,11 @@
 
 	<script type="text/template" id="different-static-template">
 		<p>Text from a different template</p>
+	</script>
+
+
+	<script type="text/template" id="list-item-template">
+		<li>One item</li>
 	</script>
 
 	<!-- Vendor Scripts -->
@@ -42,17 +51,31 @@
 		var ContactManager = new Marionette.Application();
 
 		ContactManager.addRegions({
-			mainRegion: "#main-region"
+			mainRegion: "#main-region",
+			listRegion: "#list-region"
 		});
 
 		ContactManager.StaticView = Marionette.ItemView.extend({
+			id: "static-view",
+			tagName: "span",
+			className: "instruction",
 			template: "#static-template"
 		});
 
 		ContactManager.on('initialize:after', function () {
 			console.log("ContactManger has started!");
-			var staticView = new ContactManager.StaticView();
+			var staticView = new ContactManager.StaticView({
+				template: "#different-static-template"
+			});
 			ContactManager.mainRegion.show(staticView);
+
+			var listStaticView = new ContactManager.StaticView({
+				id: "list-view",
+				tagName: "ul",
+				className: "some-list",
+				template: "#list-item-template"
+			});
+			ContactManager.listRegion.show(listStaticView);
 		});
 
 		ContactManager.start();
