@@ -35,8 +35,8 @@
 	</script>
 
 
-	<script type="text/template" id="list-item-template">
-		<li>One item</li>
+	<script type="text/template" id="contact-list-item">
+		<li><%= lastName %>, <%= firstName %> - <%= phoneNumber %> </li>
 	</script>
 
 
@@ -60,18 +60,19 @@
 			defaults: {
 				firstName: "Jane",
 				lastName: "Doe",
-				phoneNumber: "000-0000"
+				phoneNumber: "No phone number!"
 			}
 		});
 
 		// Regions and Templates
 		ContactManager.addRegions({
 			mainRegion: "#main-region",
-			listRegion: "#list-region",
 			contactRegion: "#contact-region"
 		});
 
-		// Views
+		// VIEWS
+		//
+		// *Item Views
 		ContactManager.StaticView = Marionette.ItemView.extend({
 			id: "static-view",
 			tagName: "span",
@@ -79,25 +80,58 @@
 			template: "#static-template"
 		});
 		ContactManager.ContactView = Marionette.ItemView.extend({
-			template: "#contact-template"
+			template: "#contact-template",
+
+			events: {
+				"click p": "alertPhoneNumber"
+			},
+
+			alertPhoneNumber: function (event) {
+				console.log(this.model.escape("phoneNumber"));
+			}
+		});
+		ContactManager.ContactItemView = Marionette.ItemView.extend({
+			template: "#contact-list-item"
+		});
+
+		// *CollectionViews
+		ContactManager.ContactsView = Marionette.CollectionView.extend({
+			tagName: "ul",
+			itemView: ContactManager.ContactItemView
+		});
+
+
+		// Collections
+		ContactManager.ContactCollection = Backbone.Collection.extend({
+			model: ContactManager.Contact
 		});
 
 		// EventHandlers
 		ContactManager.on('initialize:after', function () {
 			console.log("ContactManger has started!");
 
-			// Model
-			var alice = new ContactManager.Contact({
-				// firstName: "Alice",
-				// lastName: "Smith",
-				// phoneNumber: "555-0001"
-			});
+			// Collection
+			var contacts = new ContactManager.ContactCollection([
+				{
+					firstName: "Bob",
+					lastName: "Thornton"
+				},
+				{
+					firstName: "John",
+					lastName: "Johnson",
+					phoneNumber: "000-0001"
+				},
+				{
+					firstName: "Sally",
+					lastName: "Sallerson"
+				}
+			]);
 
-			var aliceView = new ContactManager.ContactView({
-				model: alice
-			});
+			var contactsListView = new ContactManager.ContactsView({
+				collection: contacts
+			})
 
-			ContactManager.contactRegion.show(aliceView);
+			ContactManager.contactRegion.show(contactsListView);
 
 			// Inline Static View
 			var staticView = new ContactManager.StaticView({
@@ -105,14 +139,7 @@
 			});
 			ContactManager.mainRegion.show(staticView);
 
-			// Inline Static View
-			var listStaticView = new ContactManager.StaticView({
-				id: "list-view",
-				tagName: "ul",
-				className: "some-list",
-				template: "#list-item-template"
-			});
-			ContactManager.listRegion.show(listStaticView);
+
 		});
 
 		ContactManager.start();
