@@ -20,10 +20,19 @@
 			You'll notice that it gets replaced by our app as soon as we start it.
 		</p>
 	</div>
-	<script src="./assets/js/vendor/jquery.js"></script>
+	<script src="./assets/js/vendor/jquery-1.10.2.js"></script>
 	<script src="./assets/js/vendor/json2.js"></script>
 	<script src="./assets/js/vendor/underscore.js"></script>
 	<script src="./assets/js/vendor/backbone.js"></script>
 	<script src="./assets/js/vendor/backbone.marionette.js"></script>
+	<script type="text/javascript">
+		var ContactManager = new Marionette.Application();
+
+		ContactManager.on('initialize:after', function () {
+			console.log("ContactManger has started!");
+		});
+
+		ContactManager.start();
+	</script>
 </body>
 </html>
