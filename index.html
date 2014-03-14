@@ -21,9 +21,9 @@
 		</p>
 	</div>
 
-	<div id="list-region" class="container">
+	<div id="list-region" class="container"></div>
 
-	</div>
+	<div id="contact-region" class="container"></div>
 
 	<script type="text/template" id="static-template">
 		<p>This is text that was rendered by our Marionette app. </p>
@@ -39,6 +39,11 @@
 		<li>One item</li>
 	</script>
 
+
+	<script type="text/template" id="contact-template">
+		<p><%= lastName %>, <%= firstName %> </p>
+	</script>
+
 	<!-- Vendor Scripts -->
 	<script src="./assets/js/vendor/jquery-1.10.2.js"></script>
 	<script src="./assets/js/vendor/json2.js"></script>
@@ -50,25 +55,51 @@
 	<script type="text/javascript">
 		var ContactManager = new Marionette.Application();
 
+		// Models
+		ContactManager.Contact = Backbone.Model.extend({});
+
+		// Regions and Templates
 		ContactManager.addRegions({
 			mainRegion: "#main-region",
-			listRegion: "#list-region"
+			listRegion: "#list-region",
+			contactRegion: "#contact-region"
 		});
 
+		// Views
 		ContactManager.StaticView = Marionette.ItemView.extend({
 			id: "static-view",
 			tagName: "span",
 			className: "instruction",
 			template: "#static-template"
 		});
+		ContactManager.ContactView = Marionette.ItemView.extend({
+			template: "#contact-template"
+		});
 
+		// EventHandlers
 		ContactManager.on('initialize:after', function () {
 			console.log("ContactManger has started!");
+
+			// Model
+			var alice = new ContactManager.Contact({
+				firstName: "Alice",
+				lastName: "Smith",
+				phoneNumber: "555-0001"
+			});
+
+			var aliceView = new ContactManager.ContactView({
+				model: alice
+			});
+
+			ContactManager.contactRegion.show(aliceView);
+
+			// Inline Static View
 			var staticView = new ContactManager.StaticView({
 				template: "#different-static-template"
 			});
 			ContactManager.mainRegion.show(staticView);
 
+			// Inline Static View
 			var listStaticView = new ContactManager.StaticView({
 				id: "list-view",
 				tagName: "ul",
