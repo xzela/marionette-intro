@@ -57,54 +57,6 @@
 
 	<script type="text/javascript">
 
-		// // VIEWS
-		// //
-		// // *Item Views
-		ContactManager.StaticView = Marionette.ItemView.extend({
-			id: "static-view",
-			tagName: "span",
-			className: "instruction",
-			template: "#static-template"
-		});
-		// ContactManager.ContactView = Marionette.ItemView.extend({
-		// 	template: "#contact-template",
-
-		// 	events: {
-		// 		"click p": "alertPhoneNumber"
-		// 	},
-
-		// 	alertPhoneNumber: function (event) {
-		// 		console.log(this.model.escape("phoneNumber"));
-		// 	}
-		// });
-
-		// ContactManager.ContactItemView = Marionette.ItemView.extend({
-		// 	tagName: "li",
-		// 	template: "#contact-list-item"
-		// });
-
-		// // // *CollectionViews
-		// ContactManager.ContactsView = Marionette.CollectionView.extend({
-		// 	tagName: "ul",
-		// 	itemView: ContactManager.ContactItemView
-		// });
-
-		ContactManager.on("initialize:after", function () {
-			// var contacts = ContactManager.request('contact:entities');
-
-			ContactManager.ContactsApp.List.Controller.listController();
-
-			var staticView = new ContactManager.StaticView({
-				template: "#different-static-template"
-			});
-
-			ContactManager.mainRegion.show(staticView);
-
-
-
-			// ContactManager.contactRegion.show(contactsListView);
-
-		});
 		ContactManager.start();
 
 	</script>
