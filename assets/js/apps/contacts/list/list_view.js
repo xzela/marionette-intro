@@ -8,7 +8,10 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			"click": "highlightName"
 		},
 
-		highlightName: function (event) {
+		highlightName: function (evnt) {
+			// suppress the default event
+			evnt.preventDefault();
+			console.log($(evnt.target).html());
 			this.$el.toggleClass("warning");
 		}
 	});
