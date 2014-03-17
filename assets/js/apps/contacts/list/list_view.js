@@ -5,7 +5,8 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 		template: "#contact-list-item",
 
 		events: {
-			"click": "highlightName"
+			"click": "highlightName",
+			"click button.js-delete": "deleteContact"
 		},
 
 		highlightName: function (evnt) {
@@ -13,6 +14,17 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			evnt.preventDefault();
 			console.log($(evnt.target).html());
 			this.$el.toggleClass("warning");
+		},
+
+		deleteContact: function (evnt) {
+			evnt.stopPropagation();
+			this.trigger("contact:delete", this.model);
+			// this.model.collection.remove(this.model);
+		},
+
+		// fade out effect
+		remove: function () {
+			this.$el.fadeOut();
 		}
 	});
 
