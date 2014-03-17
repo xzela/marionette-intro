@@ -52,6 +52,8 @@
 	<!-- Custom JS -->
 	<script src="./assets/js/app.js"></script>
 	<script src="./assets/js/entities/contact.js"></script>
+	<script src="./assets/js/apps/contacts/list/list_view.js"></script>
+	<script src="./assets/js/apps/contacts/list/list_controller.js"></script>
 
 	<script type="text/javascript">
 
@@ -76,23 +78,21 @@
 		// 	}
 		// });
 
-		ContactManager.ContactItemView = Marionette.ItemView.extend({
-			tagName: "li",
-			template: "#contact-list-item"
-		});
+		// ContactManager.ContactItemView = Marionette.ItemView.extend({
+		// 	tagName: "li",
+		// 	template: "#contact-list-item"
+		// });
 
-		// // *CollectionViews
-		ContactManager.ContactsView = Marionette.CollectionView.extend({
-			tagName: "ul",
-			itemView: ContactManager.ContactItemView
-		});
+		// // // *CollectionViews
+		// ContactManager.ContactsView = Marionette.CollectionView.extend({
+		// 	tagName: "ul",
+		// 	itemView: ContactManager.ContactItemView
+		// });
 
 		ContactManager.on("initialize:after", function () {
-			var contacts = ContactManager.request('contact:entities');
+			// var contacts = ContactManager.request('contact:entities');
 
-			var contactsListView = new ContactManager.ContactsView({
-				collection: contacts
-			});
+			ContactManager.ContactsApp.List.Controller.listController();
 
 			var staticView = new ContactManager.StaticView({
 				template: "#different-static-template"
@@ -100,7 +100,9 @@
 
 			ContactManager.mainRegion.show(staticView);
 
-			ContactManager.contactRegion.show(contactsListView);
+
+
+			// ContactManager.contactRegion.show(contactsListView);
 
 		});
 		ContactManager.start();
