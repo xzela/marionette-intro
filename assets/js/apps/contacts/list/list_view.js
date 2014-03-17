@@ -24,7 +24,10 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 
 		// fade out effect
 		remove: function () {
-			this.$el.fadeOut();
+			var self = this;
+			this.$el.fadeOut(function () {
+				Marionette.ItemView.prototype.remove.call(self);
+			});
 		}
 	});
 
