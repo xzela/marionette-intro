@@ -48,4 +48,5 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 		itemView: List.Contact,
 		itemViewContainer: "tbody"
 	});
+
 });
