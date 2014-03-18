@@ -8,7 +8,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			});
 
 			contactsListView.on('itemview:contact:delete', function (childView, model) {
-				contacts.remove(model);
+				model.destroy();
 			});
 
 			contactsListView.on('itemview:contact:show', function (childView, model) {
