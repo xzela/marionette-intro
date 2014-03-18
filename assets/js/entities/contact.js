@@ -18,15 +18,18 @@ ContactManager.module("Entities", function (Entities, ContactManager, Backbone, 
 	var initializeContacts = function () {
 		contacts = new Entities.ContactCollection([
 			{
+				id: 1,
 				firstName: "Bob",
 				lastName: "Thornton"
 			},
 			{
+				id: 2,
 				firstName: "John",
 				lastName: "Johnson",
 				phoneNumber: "000-0001"
 			},
 			{
+				id: 3,
 				firstName: "Sally",
 				lastName: "Sallerson"
 			}

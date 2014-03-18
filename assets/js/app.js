@@ -34,7 +34,7 @@ ContactManager.navigate = function (route, options) {
  * @return {String} current route
  */
 ContactManager.getCurrentRoute = function () {
-	return Backbone.history.fragement;
+	return Backbone.history.fragment;
 };
 
 
@@ -45,10 +45,7 @@ ContactManager.on("initialize:after", function () {
 		Backbone.history.start();
 
 		if (this.getCurrentRoute() === '') {
-			ContactManager.trigger("contacts:list");
-			// this.navigate("contacts");
-			// // initialize the contact controller and list contacts
-			// ContactManager.ContactsApp.List.Controller.listContacts();
+			ContactManager.trigger("contact:list");
 		}
 	}
 

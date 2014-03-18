@@ -12,7 +12,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			});
 
 			contactsListView.on('itemview:contact:show', function (childView, model) {
-				ContactManager.ContactsApp.Show.Controller.showContact(model);
+				ContactManager.trigger('contact:show', model.get('id'));
 			});
 
 			ContactManager.contactRegion.show(contactsListView);
