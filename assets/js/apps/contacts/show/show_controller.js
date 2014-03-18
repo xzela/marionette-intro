@@ -10,18 +10,18 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 		 */
 		showContact: function (id) {
 			// fetches all contact entities
-			var contact = ContactManager.request('contact:entity', id),
-				contactView;
-
-			if (contact !== undefined) {
-				contactView = new Show.Contact({
-					model: contact
-				});
-			} else {
-				contactView = new Show.MissingContact();
-			}
-			ContactManager.contactRegion.show(contactView);
+			var fetchingContact = ContactManager.request('contact:entity', id);
+			$.when(fetchingContact).done(function (contact) {
+				var contactView;
+				if (contact !== undefined) {
+					contactView = new Show.Contact({
+						model: contact
+					});
+				} else {
+					contactView = new Show.MissingContact();
+				}
+				ContactManager.contactRegion.show(contactView);
+			});
 		}
-
 	};
 });
