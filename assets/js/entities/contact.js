@@ -1,19 +1,23 @@
 ContactManager.module("Entities", function (Entities, ContactManager, Backbone, Marionette, $, _) {
 
 	Entities.Contact = Backbone.Model.extend({
+		urlRoot: "contacts",
 		defaults: {
 			firstName: "Jane",
 			lastName: "Doe",
 			phoneNumber: "No phone number!"
 		}
 	});
+	// load local storage configuration for Contact
+	Entities.configureStorage(Entities.Contact);
 
 	Entities.ContactCollection = Backbone.Collection.extend({
+		url: "contacts",
 		model: Entities.Contact,
 		comparator: "lastName"
 	});
-
-	var contacts;
+	// load local storage configuration for ContactCollections
+	Entities.configureStorage(Entities.ContactCollection);
 
 	var initializeContacts = function () {
 		contacts = new Entities.ContactCollection([
@@ -38,9 +42,8 @@ ContactManager.module("Entities", function (Entities, ContactManager, Backbone, 
 
 	var API = {
 		getContactEntities: function () {
-			if (contacts === undefined) {
-				initializeContacts();
-			}
+			var contacts = new Entities.ContactCollection();
+			contacts.fetch();
 			return contacts;
 		}
 	};
