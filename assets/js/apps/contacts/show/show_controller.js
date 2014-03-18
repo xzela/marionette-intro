@@ -15,7 +15,7 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 				model: model
 			});
 
-			ContactManager.mainRegion.show(contactView);
+			ContactManager.contactRegion.show(contactView);
 		}
 
 	};
