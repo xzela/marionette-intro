@@ -1,5 +1,6 @@
 ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbone, Marionette, $, _) {
 	Show.Controller = {
+
 		/**
 		 * Show a contact by a given id
 		 *
@@ -9,13 +10,12 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 		 */
 		showContact: function (id) {
 			// fetches all contact entities
-			var contacts = ContactManager.request('contact:entities'),
-				model = contacts.get(id),
+			var contact = ContactManager.request('contact:entity', id),
 				contactView;
 
-			if (model !== undefined) {
+			if (contact !== undefined) {
 				contactView = new Show.Contact({
-					model: model
+					model: contact
 				});
 			} else {
 				contactView = new Show.MissingContact();
