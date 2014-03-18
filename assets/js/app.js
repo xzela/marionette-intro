@@ -14,10 +14,27 @@ ContactManager.addRegions({
 	contactRegion: "#contact-region"
 });
 
+ContactManager.navigate = function (route, options) {
+	options = options || {};
+	Backbone.history.navigate(route, options);
+};
+
+ContactManager.getCurrentRoute = function () {
+	return Backbone.history.fragement;
+};
+
+
 
 ContactManager.on("initialize:after", function () {
+	if (Backbone.history) {
+		Backbone.history.start();
 
-	ContactManager.ContactsApp.List.Controller.listController();
+		if (Backbone.history.fragement === '') {
+			this.navigate("contacts");
+			ContactManager.ContactsApp.List.Controller.listContacts();
+		}
+	}
+
 
 	var staticView = new ContactManager.StaticView({
 		template: "#different-static-template"
