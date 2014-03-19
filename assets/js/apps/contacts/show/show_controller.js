@@ -9,6 +9,9 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 		 * @return null
 		 */
 		showContact: function (id) {
+			var loadingView = new ContactManager.Common.Views.Loading();
+			ContactManager.contactRegion.show(loadingView);
+
 			// fetches all contact entities
 			var fetchingContact = ContactManager.request('contact:entity', id);
 			$.when(fetchingContact).done(function (contact) {
