@@ -90,7 +90,7 @@ ContactManager.module("Entities", function (Entities, ContactManager, Backbone, 
 	});
 
 	ContactManager.reqres.setHandler("contact:entity", function (id) {
-		return API.getContactEntity();
+		return API.getContactEntity(id);
 	});
 
 
