@@ -7,7 +7,7 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 		},
 
 		submitClick: function (evnt) {
-			e.preventDefault();
+			evnt.preventDefault();
 			console.log("contact edit submitted");
 		}
 

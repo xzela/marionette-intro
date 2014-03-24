@@ -42,6 +42,9 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 	});
 
 	List.Contacts = Marionette.CompositeView.extend({
+		initialize: function () {
+			console.log("initializing the List View");
+		},
 		tagName: "table",
 		className: "table table-hover",
 		template: "#contact-list",

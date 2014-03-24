@@ -2,7 +2,7 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 	Edit.Controller = {
 		editContact: function (id) {
 			var loadingView = new ContactManager.Common.Views.Loading({
-				title: "Artifical Loading Delay"
+				title: "Slow Loading Delay"
 			});
 
 			ContactManager.contactRegion.show(loadingView);

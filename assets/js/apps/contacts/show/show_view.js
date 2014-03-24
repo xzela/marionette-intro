@@ -3,14 +3,21 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 		template: "#contact-view",
 
 		events: {
-			"click a.js-close": "closeClick"
+			"click a.js-close": "closeClick",
+			"click a.js-edit": "editClick"
 		},
 
 		closeClick: function (evnt) {
 			evnt.preventDefault();
 			evnt.stopPropagation();
 
-			ContactManager.trigger("contact:list");
+			this.trigger("contact:list");
+		},
+
+		editClick: function (evnt) {
+			evnt.preventDefault();
+
+			this.trigger("contact:edit", this.model);
 		}
 
 	});
