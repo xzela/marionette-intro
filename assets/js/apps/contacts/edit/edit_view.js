@@ -10,6 +10,10 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 			evnt.preventDefault();
 			var data = Backbone.Syphon.serialize(this);
 			this.trigger('form:submit', data);
+		},
+
+		onFormDataInvalid: function (errors) {
+			console.log("invalid form data:", errors);
 		}
 
 	});
