@@ -14,6 +14,15 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 					view = new Edit.Contact({
 						model: contact
 					});
+
+					view.on("form:submit", function (data) {
+						if (contact.save(data)) {
+							ContactManager.trigger('contact:show', contact.get('id'));
+						} else {
+							alert("can't save data");
+						}
+
+					});
 				} else {
 					view = new ContactManager.ContactsApp.Show.MissingContact();
 				}
