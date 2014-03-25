@@ -46,6 +46,15 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			this.$el.fadeOut(function () {
 				Marionette.ItemView.prototype.remove.call(self);
 			});
+		},
+
+		flash: function (cssClass) {
+			var $view = this.$el;
+			$view.hide().toggleClass(cssClass).fadeIn(800, function () {
+				setTimeout(function () {
+					$view.toggleClass(cssClass);
+				}, 500);
+			});
 		}
 	});
 
