@@ -11,7 +11,8 @@ ContactManager.StaticView = Marionette.ItemView.extend({
 // Regions and Templates
 ContactManager.addRegions({
 	mainRegion: "#main-region",
-	contactRegion: "#contact-region"
+	contactRegion: "#contact-region",
+	dialogRegion: "#dialog-region"
 });
 
 /**
