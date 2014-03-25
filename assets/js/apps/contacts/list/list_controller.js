@@ -1,13 +1,23 @@
 ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbone, Marionette, $, _) {
 	List.Controller = {
 		listContacts: function () {
+			// loading view
 			var loadingView = new ContactManager.Common.Views.Loading();
 			ContactManager.contactRegion.show(loadingView);
 
 			var fetchingContacts = ContactManager.request("contact:entities");
+
+			var contactsListLayout = new List.Layout();
+			var contactsListPanel = new List.Panel();
+
 			$.when(fetchingContacts).done(function (contacts) {
 				var contactsListView = new List.Contacts({
 					collection: contacts
+				});
+
+				contactsListLayout.on('show', function () {
+					contactsListLayout.panelRegion.show(contactsListPanel);
+					contactsListLayout.contactsRegion.show(contactsListView);
 				});
 
 				contactsListView.on('itemview:contact:show', function (childView, model) {
@@ -35,7 +45,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 					ContactManager.dialogRegion.show(view);
 				});
 
-				ContactManager.contactRegion.show(contactsListView);
+				ContactManager.contactRegion.show(contactsListLayout);
 			});
 		}
 	};
