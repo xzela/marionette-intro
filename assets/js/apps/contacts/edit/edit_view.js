@@ -12,8 +12,37 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 			this.trigger('form:submit', data);
 		},
 
+		clearFormErrors: function () {
+
+
+		},
+
 		onFormDataInvalid: function (errors) {
-			console.log("invalid form data:", errors);
+			var _this = this;
+			var $view = _this.$el;
+			var clearFormErrors = function () {
+				var $form = $view.find("form");
+				$form.find(".help-inline").each(function () {
+					$(this).remove();
+				});
+
+				$form.find('.control-group.error').each(function () {
+					$(this).removeClass('error');
+				});
+			};
+
+
+			var markErrors = function (value, key) {
+				var $controlGroup = _this.$el.find('#contact-' + key).parent();
+				var $errorEl = $('<span>', {
+					class: "help-inline error",
+					text: value
+				});
+				$controlGroup.append($errorEl).addClass('error');
+			};
+			// remove the error messages
+			clearFormErrors();
+			_.each(errors, markErrors);
 		}
 
 	});
