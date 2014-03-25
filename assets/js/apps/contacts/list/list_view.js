@@ -7,7 +7,8 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 		events: {
 			"click": "highlightName",
 			"click button.js-delete": "deleteContact",
-			"click td a.js-show": "showClick"
+			"click td a.js-show": "showClick",
+			"click td a.js-edit": "editClicked"
 		},
 
 		highlightName: function (evnt) {
