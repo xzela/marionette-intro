@@ -11,7 +11,7 @@ ContactManager.module('ContactsApp.Show', function (Show, ContactManager, Backbo
 			evnt.preventDefault();
 			evnt.stopPropagation();
 
-			this.trigger("contact:list");
+			ContactManager.trigger("contact:list");
 		},
 
 		editClick: function (evnt) {

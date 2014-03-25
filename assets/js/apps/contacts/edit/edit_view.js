@@ -19,6 +19,16 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 			}
 		},
 
+		onShow: function () {
+			if (this.options.asModal) {
+				this.$el.dialog({
+					modal: true,
+					title: this.title,
+					width: 'auto'
+				});
+			}
+		},
+
 		submitClick: function (evnt) {
 			evnt.preventDefault();
 			var data = Backbone.Syphon.serialize(this);

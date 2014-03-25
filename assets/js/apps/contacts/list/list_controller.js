@@ -24,15 +24,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 						asModal: true
 					});
 
-					view.on('show', function () {
-						this.$el.dialog({
-							modal: true,
-							width: "auto"
-						});
-					});
-
 					ContactManager.dialogRegion.show(view);
-
 				});
 
 				ContactManager.contactRegion.show(contactsListView);
