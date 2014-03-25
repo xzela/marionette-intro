@@ -8,7 +8,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			"click": "highlightName",
 			"click button.js-delete": "deleteContact",
 			"click td a.js-show": "showClick",
-			"click td a.js-edit": "editClicked"
+			"click td a.js-edit": "editClick"
 		},
 
 		highlightName: function (evnt) {
@@ -31,6 +31,13 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 
 			// trigger event
 			this.trigger("contact:show", this.model);
+		},
+
+		editClick: function (evnt) {
+			evnt.preventDefault();
+			evnt.stopPropagation();
+
+			this.trigger("contact:edit", this.model);
 		},
 
 		// fade out effect

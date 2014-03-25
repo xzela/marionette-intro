@@ -18,6 +18,12 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 					model.destroy();
 				});
 
+				contactsListView.on('itemview:contact:edit', function (childView, model) {
+					console.log("edit clicked via list view");
+					ContactManager.trigger('contact:edit', model.get('id'));
+
+				});
+
 				ContactManager.contactRegion.show(contactsListView);
 			});
 		}
