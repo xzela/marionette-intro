@@ -76,14 +76,25 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 	});
 
 	List.Contacts = Marionette.CompositeView.extend({
-		initialize: function () {
-			console.log("initializing the List View");
-		},
 		tagName: "table",
 		className: "table table-hover",
 		template: "#contact-list",
 		itemView: List.Contact,
-		itemViewContainer: "tbody"
+		itemViewContainer: "tbody",
+
+		initialize: function () {
+			this.listenTo(this.collection, 'rest', function () {
+				this.appendHtml = function (collectionView, itemView, index) {
+					collectionView.$el.append(itemView.el);
+				};
+			});
+		},
+
+		onCompositeCollectionRendered: function () {
+			this.appendHtml = function (collectionView, itemView, index) {
+				collectionView.$el.prepend(itemView.el);
+			};
+		}
 	});
 
 });
