@@ -6,7 +6,7 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 		},
 
 		onRender: function () {
-			if (!this.options.asModal) {
+			if (this.options.generateTitle) {
 				var $title = $('<h1>', {
 					text: this.title
 				});

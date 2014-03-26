@@ -12,7 +12,8 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 				var view;
 				if (contact !== undefined) {
 					view = new Edit.Contact({
-						model: contact
+						model: contact,
+						generateTitle: true
 					});
 
 					view.on("form:submit", function (data) {
@@ -28,6 +29,6 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 				}
 				ContactManager.contactRegion.show(view);
 			});
-		}
+		},
 	};
 });

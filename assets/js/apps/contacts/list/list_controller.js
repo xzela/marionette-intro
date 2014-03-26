@@ -23,8 +23,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 				contactsListPanel.on('contact:new', function () {
 					var newContact = new ContactManager.Entities.Contact();
 					var view = new ContactManager.ContactsApp.New.Contact({
-						model: newContact,
-						asModal: true
+						model: newContact
 					});
 
 					view.on('form:submit', function (data) {
@@ -60,9 +59,9 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 
 				contactsListView.on('itemview:contact:edit', function (childView, model) {
 					var view = new ContactManager.ContactsApp.Edit.Contact({
-						model: model,
-						asModal: true
+						model: model
 					});
+
 					view.on('form:submit', function (data) {
 						if (model.save(data)) {
 							childView.render();
@@ -72,6 +71,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 							view.triggerMethod("form:data:invalid", model.validationError);
 						}
 					});
+
 					ContactManager.dialogRegion.show(view);
 				});
 
