@@ -25,7 +25,6 @@ ContactManager.module('ContactsApp.Common.Views', function (Views, ContactManage
 			}
 		},
 
-
 		submitClick: function (evnt) {
 			evnt.preventDefault();
 			var data = Backbone.Syphon.serialize(this);
