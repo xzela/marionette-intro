@@ -12,6 +12,8 @@ ContactManager.module("ContactsApp.Edit", function (Edit, ContactManager, Backbo
 				});
 				this.$el.prepend($title);
 			}
+
+			this.$('.js-submit').text('Update Contact');
 		}
 
 	});
