@@ -34,6 +34,35 @@ ContactManager.module('Entities', function (Entities, ContactManager, Backbone, 
 			return items;
 		};
 
+		original.on('reset', function () {
+			var items = applyFilter(filtered._currentCriterion, filtered._currentFilter);
+			filtered.reset(item);
+		});
+
+		original.on('add', function (models) {
+			var coll = new original.constructor();
+			coll.add(models);
+
+			var items = applyFilter(filtered._currentCriterion, filtered._currentFilter);
+			filtered.add(item);
+		});
+
+		filtered.filter = function (filterCriterion) {
+			filtered._currentFilter = 'filter';
+			var items = applyFilter(filterCriterion, 'filter');
+
+			filtered.reset(items);
+			return filtered;
+		};
+
+		filtered.where = function (filterCriterion) {
+			filtered._currentFilter = 'where';
+			var items = applyFilter(filterCriterion, 'where');
+
+			filtered.reset(items);
+			return filtered;
+		};
+
 
 		return filtered;
 	};
