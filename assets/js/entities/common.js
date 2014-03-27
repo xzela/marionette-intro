@@ -6,8 +6,8 @@ ContactManager.module('Entities', function (Entities, ContactManager, Backbone, 
 		filtered.filterFunction = options.filterFunction;
 
 
-		var applyFilter = function (filterCriterion, filterStrategy) {
-			var collection = original;
+		var applyFilter = function (filterCriterion, filterStrategy, coll) {
+			var collection = coll || original;
 			var criterion;
 			if (filterStrategy === 'filter') {
 				criterion = filterCriterion.trim();
@@ -36,15 +36,15 @@ ContactManager.module('Entities', function (Entities, ContactManager, Backbone, 
 
 		original.on('reset', function () {
 			var items = applyFilter(filtered._currentCriterion, filtered._currentFilter);
-			filtered.reset(item);
+			filtered.reset(items);
 		});
 
 		original.on('add', function (models) {
 			var coll = new original.constructor();
 			coll.add(models);
 
-			var items = applyFilter(filtered._currentCriterion, filtered._currentFilter);
-			filtered.add(item);
+			var items = applyFilter(filtered._currentCriterion, filtered._currentFilter, coll);
+			filtered.add(items);
 		});
 
 		filtered.filter = function (filterCriterion) {
