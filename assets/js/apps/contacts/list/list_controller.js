@@ -55,9 +55,12 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 
 						if (newContact.save(data)) {
 							contacts.add(newContact);
-							ContactManager.dialogRegion.close();
+							view.trigger('dialog:close');
 							var f = contactsListView.children.findByModel(newContact);
-							f.flash('success');
+							if (f) {
+								f.flash('success');
+							}
+
 						} else {
 							view.triggerMethod('form:data:invalid', newContact.validationError);
 						}
