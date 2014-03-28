@@ -20,10 +20,19 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 			"submit #filter-form": "filterContacts"
 		},
 
+		// short cut for accessing ui elements by jquery selector
+		ui: {
+			criterion: 'input.js-filter-criterion'
+		},
+
 		filterContacts: function (evnt) {
 			evnt.preventDefault();
 			var criterion = this.$('.js-filter-criterion').val();
 			this.trigger('contacts:filter', criterion);
+		},
+
+		onSetFilterCriterion: function (criterion) {
+			this.ui.criterion.val(criterion);
 		}
 	});
 
