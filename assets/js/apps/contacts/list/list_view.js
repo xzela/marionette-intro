@@ -17,12 +17,17 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 		},
 
 		events: {
-			"submit #filter-form": "filterContacts"
+			"submit #filter-form": "filterContacts",
 		},
 
 		// short cut for accessing ui elements by jquery selector
 		ui: {
 			criterion: 'input.js-filter-criterion'
+		},
+
+		showAbout: function (evnt) {
+			evnt.preventDefault();
+			ContactManager.trigger("about:show");
 		},
 
 		filterContacts: function (evnt) {
@@ -34,6 +39,7 @@ ContactManager.module('ContactsApp.List', function (List, ContactManager, Backbo
 		onSetFilterCriterion: function (criterion) {
 			this.ui.criterion.val(criterion);
 		}
+
 	});
 
 	List.Contact = Marionette.ItemView.extend({

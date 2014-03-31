@@ -12,6 +12,7 @@ ContactManager.module("AboutApp", function (AboutApp, ContactManager, Backbone, 
 	};
 
 	ContactManager.on("about:show", function () {
+		console.log("here?");
 		ContactManager.navigate("about");
 		API.showAbout();
 	});
