@@ -6,6 +6,10 @@ ContactManager.module('HeaderApp.List', function (List, ContactManager, Backbone
 				collection: links
 			});
 
+			headers.on("brand:clicked", function () {
+				ContactManager.trigger("contact:list");
+			});
+
 			ContactManager.headerRegion.show(headers);
 		}
 	};

@@ -8,6 +8,16 @@ ContactManager.module("HeaderApp.List", function (List, ContactManager, Backbone
 		template: "#header-template",
 		className: "navbar navbar-inverse navbar-fixed-top",
 		itemView: List.Header,
-		itemViewContainer: "ul"
+		itemViewContainer: "ul",
+
+		events: {
+			"click a.brand": "brandClicked"
+		},
+
+		brandClicked: function (evnt) {
+			evnt.preventDefault();
+			this.trigger("brand:clicked");
+		}
+
 	});
 });
