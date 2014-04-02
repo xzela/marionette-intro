@@ -11,6 +11,16 @@ ContactManager.module('HeaderApp.List', function (List, ContactManager, Backbone
 			});
 
 			ContactManager.headerRegion.show(headers);
+		},
+
+		setActiveHeader: function (headerUrl) {
+			var links = ContactManager.request('header:entities');
+			var headerToSelect = links.find(function (header) {
+				return header.get('url') === headerUrl;
+			});
+
+			headerToSelect.select();
+			links.trigger("reset");
 		}
 	};
 });

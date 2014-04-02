@@ -1,7 +1,14 @@
 ContactManager.module("HeaderApp.List", function (List, ContactManager, Backbone, Marionette, $, _) {
 	List.Header = Marionette.ItemView.extend({
 		template: "#header-link",
-		tagName: "li"
+		tagName: "li",
+
+		onRender: function () {
+			if (this.model.selected) {
+				this.$el.addClass('active');
+			}
+		}
+
 	});
 
 	List.Headers = Marionette.CompositeView.extend({
@@ -17,7 +24,7 @@ ContactManager.module("HeaderApp.List", function (List, ContactManager, Backbone
 		brandClicked: function (evnt) {
 			evnt.preventDefault();
 			this.trigger("brand:clicked");
+			ContactManager.trigger("contact:new");
 		}
-
 	});
 });

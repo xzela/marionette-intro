@@ -1,8 +1,8 @@
 ContactManager.module('Entities', function (Entities, ContactManager, Backbone, Marionette, $, _) {
 	Entities.Header = Backbone.Model.extend({
 		initialize: function () {
-			var selectable = Backbone.Picky.Selectable(this);
-			_.extend(this, selectable);
+			// var selectable = ;
+			_.extend(this, Backbone.Picky.Selectable(this));
 		}
 	});
 
@@ -10,8 +10,8 @@ ContactManager.module('Entities', function (Entities, ContactManager, Backbone, 
 		model: Entities.Header,
 
 		initialize: function () {
-			var singleSelect = Backbone.Picky.SingleSelect(this);
-			_.extend(this, singleSelect);
+			// var singleSelect = ;
+			_.extend(this, Backbone.Picky.SingleSelect(this));
 		}
 	});
 
