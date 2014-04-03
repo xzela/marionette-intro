@@ -1,8 +1,3 @@
-// Backbone.Picky, v0.2.0
-// Copyright (c)2013 Derick Bailey, Muted Solutions, LLC.
-// Distributed under MIT license
-// http://github.com/derickbailey/backbone.picky
-
 Backbone.Picky = (function (Backbone, _) {
   var Picky = {};
 
@@ -20,7 +15,7 @@ Backbone.Picky = (function (Backbone, _) {
   _.extend(Picky.SingleSelect.prototype, {
 
     // Select a model, deselecting any previously
-    // selected model
+    // select model
     select: function(model){
       if (model && this.selected === model) { return; }
 
@@ -28,7 +23,7 @@ Backbone.Picky = (function (Backbone, _) {
 
       this.selected = model;
       this.selected.select();
-      this.trigger("select:one", model);
+      this.trigger("selected", model);
     },
 
     // Deselect a model, resulting in no model
@@ -40,7 +35,7 @@ Backbone.Picky = (function (Backbone, _) {
       if (this.selected !== model){ return; }
 
       this.selected.deselect();
-      this.trigger("deselect:one", this.selected);
+      this.trigger("deselected", this.selected);
       delete this.selected;
     }
 
@@ -123,7 +118,7 @@ Backbone.Picky = (function (Backbone, _) {
       if (this.selected) { return; }
 
       this.selected = true;
-      this.trigger("selected", this);
+      this.trigger("selected");
 
       if (this.collection) {
         this.collection.select(this);
@@ -136,7 +131,7 @@ Backbone.Picky = (function (Backbone, _) {
       if (!this.selected) { return; }
 
       this.selected = false;
-      this.trigger("deselected", this);
+      this.trigger("deselected");
 
       if (this.collection) {
         this.collection.deselect(this);

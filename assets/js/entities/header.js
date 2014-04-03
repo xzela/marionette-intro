@@ -1,8 +1,8 @@
 ContactManager.module('Entities', function (Entities, ContactManager, Backbone, Marionette, $, _) {
 	Entities.Header = Backbone.Model.extend({
 		initialize: function () {
-			// var selectable = ;
-			_.extend(this, Backbone.Picky.Selectable(this));
+			var selectable = new Backbone.Picky.Selectable(this);
+			_.extend(this, selectable);
 		}
 	});
 
@@ -10,15 +10,15 @@ ContactManager.module('Entities', function (Entities, ContactManager, Backbone, 
 		model: Entities.Header,
 
 		initialize: function () {
-			// var singleSelect = ;
-			_.extend(this, Backbone.Picky.SingleSelect(this));
+			var singleSelect = new Backbone.Picky.SingleSelect(this);
+			_.extend(this, singleSelect);
 		}
 	});
 
 	var initializeHeaders = function () {
 		Entities.headers = new Entities.HeaderCollection([
-			{name: "Contacts", url: 'contacts'},
-			{name: "About", url: 'about'}
+			{name: "Contacts", url: 'contacts', navigationTrigger: "contact:list"},
+			{name: "About", url: 'about', navigationTrigger: "about:show"}
 		]);
 	};
 

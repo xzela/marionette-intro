@@ -10,6 +10,11 @@ ContactManager.module('HeaderApp.List', function (List, ContactManager, Backbone
 				ContactManager.trigger("contact:list");
 			});
 
+			headers.on("itemview:navigate", function (childView, model) {
+				var trigger = model.get("navigationTrigger");
+				ContactManager.trigger(trigger);
+			});
+
 			ContactManager.headerRegion.show(headers);
 		},
 
@@ -19,6 +24,7 @@ ContactManager.module('HeaderApp.List', function (List, ContactManager, Backbone
 				return header.get('url') === headerUrl;
 			});
 
+			// @TODO this is broken!
 			headerToSelect.select();
 			links.trigger("reset");
 		}
